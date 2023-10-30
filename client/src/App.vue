@@ -98,7 +98,7 @@
     // 考虑到断点续传，在上传之前，需要过滤掉已经传过的那部分切片
     const formDatas = data
     .filter((item) => {
-      !existChunks.includes(item.chunkHash)
+      return !existChunks.includes(item.chunkHash)
     })
     .map((item) => {
       const formData = new FormData()
@@ -148,6 +148,7 @@
     fileHash.value = hash as string
     // 校验
     const vData = await verify()
+    console.log(vData);
     
     if(!vData.shouldUpload) {
       alert('秒传成功')
